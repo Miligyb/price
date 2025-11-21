@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#mq /$CAM\</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+        :root {
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --accent-color: #333333;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            selection-background-color: #ffffff;
+            selection-color: #000000;
+        }
+
+        /* GLITCH EFFECT */
+        .glitch {
+            position: relative;
+            color: white;
+            font-weight: bold;
+        }
+
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -1px 0 #ff00c1;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim-1 3s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -1px 0 #00fff9;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim-2 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip: rect(30px, 9999px, 10px, 0); }
+            20% { clip: rect(80px, 9999px, 90px, 0); }
+            40% { clip: rect(40px, 9999px, 20px, 0); }
+            60% { clip: rect(10px, 9999px, 90px, 0); }
+            80% { clip: rect(20px, 9999px, 60px, 0); }
+            100% { clip: rect(70px, 9999px, 30px, 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(10px, 9999px, 30px, 0); }
+            20% { clip: rect(60px, 9999px, 10px, 0); }
+            40% { clip: rect(20px, 9999px, 50px, 0); }
+            60% { clip: rect(90px, 9999px, 10px, 0); }
+            80% { clip: rect(50px, 9999px, 80px, 0); }
+            100% { clip: rect(30px, 9999px, 40px, 0); }
+        }
+
+        /* NOISE BACKGROUND OVERLAY */
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.05;
+            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAA5OTkAAABERERmZmZQUFCSkpKcnJwAAAA2s28UPAAAACHRSTlMAMwA1MzMzM7O0wMcAAAAJcEhZcwAADsQAAA7EAZUrDhsAAABoSURBVDjL7dMxCoBACADBPd/i/3+lhaW9YJvCco0iYn1J086M3rFhH9q5d2z4jA3fseH704Z9aWf/2Nn/9v/Y8B0bvmPDd2z4jg3fseE7NnzHhu/Y8B1iBxFwM8zPZgAAAABJRU5ErkJggg==');
+        }
+
+        /* ITEM HOVER ANIMATION */
+        .service-item {
+            border-bottom: 1px solid #333;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            opacity: 0; /* Hidden by default */
+            transform: translateX(-20px);
+        }
+
+        .service-item.animate-in {
+            animation: slideInRight 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes slideInRight {
+            0% { opacity: 0; transform: translateX(-30px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        .service-item:hover {
+            background: white;
+            color: black;
+            padding-left: 15px;
+            border-color: white;
+        }
+
+        .service-item:hover .arrow {
+            transform: translateX(5px);
+            opacity: 1;
+        }
+
+        /* TELEGRAM LINK HOVER */
+        .tg-link {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .tg-link:hover {
+            color: #fff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+            transform: translateX(5px);
+        }
+        .tg-link::before {
+            content: '>';
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tg-link:hover::before {
+            opacity: 1;
+        }
+
+        /* FADE IN UP GENERAL */
+        .reveal-text {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cascade Delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        
+        /* Price List Cascade Delays */
+        .price-delay-1 { animation-delay: 0.4s; }
+        .price-delay-2 { animation-delay: 0.6s; }
+        .price-delay-3 { animation-delay: 0.8s; }
+        .price-delay-4 { animation-delay: 1.0s; }
+
+    </style>
+</head>
+<body class="flex flex-col min-h-screen justify-between p-6 md:p-12 max-w-4xl mx-auto">
+
+    <div class="noise"></div>
+
+    <!-- HEADER -->
+    <header class="mb-16 reveal-text">
+        <h1 class="text-5xl md:text-7xl font-bold tracking-tighter glitch mb-2" data-text="#mq /$CAM\">
+            #mq /$CAM\
+        </h1>
+        <div class="h-[2px] w-24 bg-white mt-4"></div>
+    </header>
+
+    <!-- INFO -->
+    <main class="flex-grow">
+        <div class="mb-12 reveal-text delay-100">
+            <p class="text-sm text-gray-500 mb-2 uppercase tracking-widest">[ INFO ]</p>
+            <p class="text-lg md:text-xl leading-relaxed max-w-2xl text-gray-300">
+                Услуги предоставляю по городу <span class="text-white border-b border-gray-600">Санкт-Петербург</span> и Лен. области.
+            </p>
+            
+            <!-- TELEGRAM LINK -->
+            <div class="mt-6">
+                <a href="https://t.me/CAMSPB" target="_blank" class="tg-link text-xl text-gray-400 hover:text-white font-bold border border-gray-800 p-4 w-full md:w-auto justify-center hover:border-white">
+                    <span class="animate-pulse text-green-500">●</span> TELEGRAM: @CAMSPB
+                </a>
+            </div>
+        </div>
+
+        <!-- SERVICES LIST -->
+        <div class="w-full reveal-text delay-200">
+            <p class="text-sm text-gray-500 mb-6 uppercase tracking-widest">[ PRICE LIST ]</p>
+            
+            <div class="flex flex-col gap-4">
+                <!-- Item 1 -->
+                <div class="service-item animate-in price-delay-1 py-4 flex justify-between items-center cursor-pointer group">
+                    <div class="flex items-center gap-3">
+                        <span class="text-gray-500 text-xs font-mono">01</span>
+                        <span class="text-lg md:text-2xl font-bold">поджог двери</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="font-mono text-lg">10k+</span>
+                        <span class="arrow opacity-0 transition-opacity duration-300 text-sm">●</span>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="service-item animate-in price-delay-2 py-4 flex justify-between items-center cursor-pointer group">
+                    <div class="flex items-center gap-3">
+                        <span class="text-gray-500 text-xs font-mono">02</span>
+                        <span class="text-lg md:text-2xl font-bold">юз на двери (Продвинутая)</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="font-mono text-lg">5k+</span>
+                        <span class="arrow opacity-0 transition-opacity duration-300 text-sm">●</span>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="service-item animate-in price-delay-3 py-4 flex justify-between items-center cursor-pointer group">
+                    <div class="flex items-center gap-3">
+                        <span class="text-gray-500 text-xs font-mono">03</span>
+                        <span class="text-lg md:text-2xl font-bold">Комплекс (Услуга поджог+юз)</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="font-mono text-lg">13k+</span>
+                        <span class="arrow opacity-0 transition-opacity duration-300 text-sm">●</span>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="service-item animate-in price-delay-4 py-4 flex justify-between items-center cursor-pointer group">
+                    <div class="flex items-center gap-3">
+                        <span class="text-gray-500 text-xs font-mono">04</span>
+                        <span class="text-lg md:text-2xl font-bold">Извинения</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="font-mono text-lg">15k+</span>
+                        <span class="arrow opacity-0 transition-opacity duration-300 text-sm">●</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="mt-20 py-6 border-t border-gray-900 text-center md:text-left reveal-text delay-300">
+        <div class="flex flex-col md:flex-row justify-between items-end">
+            <div class="text-[10px] text-gray-600 font-mono uppercase tracking-widest">
+                <p>CAM 2025 © ВСЕ ПРАВА ЗАЩИЩЕНЫ</p>
+                <p class="mt-1 text-red-900/50">СПИСОК УСЛУГ ПРЕДСТАВЛЕН В ИНФОРМАТИВНОМ ХАРАКТЕРЕ</p>
+            </div>
+            <div class="text-[10px] text-gray-800 mt-4 md:mt-0 font-mono">
+                EST. 2025 / SPB / RUSSIA
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Matrix-style random character scramble on hover for the main title
+        const title = document.querySelector('.glitch');
+        const originalText = title.getAttribute('data-text');
+        const chars = '!<>-_\\/[]{}—=+*^?#';
+        
+        let interval;
+
+        title.onmouseover = event => {  
+            let iteration = 0;
+            
+            clearInterval(interval);
+            
+            interval = setInterval(() => {
+                event.target.innerText = event.target.innerText
+                    .split("")
+                    .map((letter, index) => {
+                        if(index < iteration) {
+                            return originalText[index];
+                        }
+                        return chars[Math.floor(Math.random() * chars.length)]
+                    })
+                    .join("");
+                
+                if(iteration >= originalText.length){ 
+                    clearInterval(interval);
+                }
+                
+                iteration += 1 / 3;
+            }, 30);
+        }
+    </script>
+</body>
+</html>
+
+
