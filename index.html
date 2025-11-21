@@ -113,6 +113,17 @@
             transform: translateX(5px);
             opacity: 1;
         }
+        
+        /* Discount/Strikethrough Styles */
+        .old-price {
+            text-decoration: line-through;
+            color: #666;
+            font-size: 0.8em;
+        }
+        
+        .service-item:hover .old-price {
+            color: #999;
+        }
 
         /* TELEGRAM LINK HOVER */
         .tg-link {
@@ -142,6 +153,16 @@
             transform: translateY(20px);
             animation: fadeInUp 1s forwards;
         }
+        
+        /* DISCLAIMER ANIMATION */
+        .reveal-disclaimer {
+            opacity: 0;
+            animation: fadeInSimple 1s forwards;
+        }
+        
+        @keyframes fadeInSimple {
+            to { opacity: 1; }
+        }
 
         @keyframes fadeInUp {
             to { opacity: 1; transform: translateY(0); }
@@ -157,6 +178,7 @@
         .price-delay-2 { animation-delay: 0.6s; }
         .price-delay-3 { animation-delay: 0.8s; }
         .price-delay-4 { animation-delay: 1.0s; }
+        .price-delay-5 { animation-delay: 1.2s; }
 
     </style>
 </head>
@@ -177,7 +199,7 @@
         <div class="mb-12 reveal-text delay-100">
             <p class="text-sm text-gray-500 mb-2 uppercase tracking-widest">[ INFO ]</p>
             <p class="text-lg md:text-xl leading-relaxed max-w-2xl text-gray-300">
-                Услуги предоставляю по городу <span class="text-white border-b border-gray-600">Санкт-Петербург</span> и Лен. области.
+                Разработка веб-ресурсов, ботов и программного обеспечения.
             </p>
             
             <!-- TELEGRAM LINK -->
@@ -190,56 +212,77 @@
 
         <!-- SERVICES LIST -->
         <div class="w-full reveal-text delay-200">
-            <p class="text-sm text-gray-500 mb-6 uppercase tracking-widest">[ PRICE LIST ]</p>
+            <p class="text-sm text-gray-500 mb-6 uppercase tracking-widest">[ SERVICES ]</p>
             
             <div class="flex flex-col gap-4">
-                <!-- Item 1 -->
+                <!-- Item 1: HTML Sites -->
                 <div class="service-item animate-in price-delay-1 py-4 flex justify-between items-center cursor-pointer group">
                     <div class="flex items-center gap-3">
                         <span class="text-gray-500 text-xs font-mono">01</span>
-                        <span class="text-lg md:text-2xl font-bold">поджог двери</span>
+                        <span class="text-lg md:text-2xl font-bold">Создание HTML сайтов</span>
                     </div>
                     <div class="flex items-center gap-4">
-                        <span class="font-mono text-lg">10k+</span>
+                        <!-- Flex container for prices guarantees side-by-side layout -->
+                        <div class="font-mono text-lg flex items-center gap-3">
+                            <span class="old-price">350₽</span>
+                            <span>300₽</span>
+                        </div>
                         <span class="arrow opacity-0 transition-opacity duration-300 text-sm">●</span>
                     </div>
                 </div>
 
-                <!-- Item 2 -->
+                <!-- Item 2: Telegram Bots -->
                 <div class="service-item animate-in price-delay-2 py-4 flex justify-between items-center cursor-pointer group">
                     <div class="flex items-center gap-3">
                         <span class="text-gray-500 text-xs font-mono">02</span>
-                        <span class="text-lg md:text-2xl font-bold">юз на двери (Продвинутая)</span>
+                        <span class="text-lg md:text-2xl font-bold">Создание Telegram ботов</span>
                     </div>
                     <div class="flex items-center gap-4">
-                        <span class="font-mono text-lg">5k+</span>
+                        <div class="font-mono text-lg flex items-center gap-3">
+                            <span class="old-price">250₽</span>
+                            <span>200₽</span>
+                        </div>
                         <span class="arrow opacity-0 transition-opacity duration-300 text-sm">●</span>
                     </div>
                 </div>
 
-                <!-- Item 3 -->
+                <!-- Item 3: Python Code -->
                 <div class="service-item animate-in price-delay-3 py-4 flex justify-between items-center cursor-pointer group">
                     <div class="flex items-center gap-3">
                         <span class="text-gray-500 text-xs font-mono">03</span>
-                        <span class="text-lg md:text-2xl font-bold">Комплекс (Услуга поджог+юз)</span>
+                        <span class="text-lg md:text-2xl font-bold">Создание PYTHON кода</span>
                     </div>
                     <div class="flex items-center gap-4">
-                        <span class="font-mono text-lg">13k+</span>
+                        <div class="font-mono text-lg flex items-center gap-3">
+                            <span class="old-price">150₽</span>
+                            <span>100₽</span>
+                        </div>
                         <span class="arrow opacity-0 transition-opacity duration-300 text-sm">●</span>
                     </div>
                 </div>
 
-                <!-- Item 4 -->
+                <!-- Item 4: Consultation -->
                 <div class="service-item animate-in price-delay-4 py-4 flex justify-between items-center cursor-pointer group">
                     <div class="flex items-center gap-3">
                         <span class="text-gray-500 text-xs font-mono">04</span>
-                        <span class="text-lg md:text-2xl font-bold">Извинения</span>
+                        <span class="text-lg md:text-2xl font-bold">Консультация</span>
                     </div>
                     <div class="flex items-center gap-4">
-                        <span class="font-mono text-lg">15k+</span>
+                        <div class="font-mono text-lg flex items-center gap-3">
+                            <span class="old-price">50₽</span>
+                            <span>0₽</span>
+                        </div>
                         <span class="arrow opacity-0 transition-opacity duration-300 text-sm">●</span>
                     </div>
                 </div>
+
+                <!-- Disclaimer -->
+                <div class="reveal-disclaimer price-delay-5 mt-2 text-right">
+                    <p class="text-[10px] md:text-xs text-gray-500 font-mono">
+                        * Цена может варьироваться в зависимости от сложности задачи
+                    </p>
+                </div>
+
             </div>
         </div>
     </main>
@@ -249,10 +292,10 @@
         <div class="flex flex-col md:flex-row justify-between items-end">
             <div class="text-[10px] text-gray-600 font-mono uppercase tracking-widest">
                 <p>CAM 2025 © ВСЕ ПРАВА ЗАЩИЩЕНЫ</p>
-                <p class="mt-1 text-red-900/50">СПИСОК УСЛУГ ПРЕДСТАВЛЕН В ИНФОРМАТИВНОМ ХАРАКТЕРЕ</p>
+                <p class="mt-1 text-gray-700">DEV / DESIGN / CODE</p>
             </div>
             <div class="text-[10px] text-gray-800 mt-4 md:mt-0 font-mono">
-                EST. 2025 / SPB / RUSSIA
+                EST. 2025 / ONLINE
             </div>
         </div>
     </footer>
